@@ -1,0 +1,53 @@
+;
+;	File '200616_topol.top' was generated
+;	By user: cgavinhann (21441)
+;	On host: ws9.kinsc-cluster.haverford.edu
+;	At date: Sun Jun 21 09:37:11 2020
+
+;
+;	This is a standalone topology file
+;
+;	Created by:
+;	                 :-) GROMACS - gmx pdb2gmx, VERSION 5.1.2 (-:
+;	
+;	Executable:   /packages/gromacs5.1.2/bin/gmx
+;	Data prefix:  /packages/gromacs5.1.2
+;	Command line:
+;	  gmx pdb2gmx -f 200616.pdb -o 200616.gro -water tip3p -his -chainsep interactive -p 200616_topol.top -i 200616_posre.itp
+;	Force field was read from current directory or a relative path - path added.
+;
+
+; Include forcefield parameters
+#include "./charmm36-190509.ff/forcefield.itp"
+
+; Include chain topologies
+#include "200621_topol_Protein_chain_A.itp"
+#include "200621_topol_Protein_chain_B.itp"
+#include "200621_topol_Protein_chain_C.itp"
+#include "200621_topol_Protein_chain_D.itp"
+
+; Include water topology
+#include "./charmm36-190509.ff/tip3p.itp"
+
+#ifdef POSRES_WATER
+; Position restraint for each water oxygen
+[ position_restraints ]
+;  i funct       fcx        fcy        fcz
+   1    1       1000       1000       1000
+#endif
+
+; Include topology for ions
+#include "./charmm36-190509.ff/ions.itp"
+
+[ system ]
+; Name
+N-{3-[DIHYDROXY(NONYL)-LAMBDA~4~-SULFANYL]PROPYL}-N~3~- t=   0.00000 in water
+
+[ molecules ]
+; Compound        #mols
+Protein_chain_A     1
+Protein_chain_B     1
+Protein_chain_C     1
+Protein_chain_D     1
+SOL         16187
+NA               34
